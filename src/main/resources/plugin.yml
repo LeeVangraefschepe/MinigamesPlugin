@@ -1,0 +1,4 @@
+name: MinigamesPlugin
+version: '${project.version}'
+main: com.example.minigamesplugin.MinigamesPlugin
+api-version: '26.2'

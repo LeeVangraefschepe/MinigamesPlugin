@@ -1,0 +1,14 @@
+target/
+*.class
+
+# Local test server (jars are rebuilt by build-spigot.sh, world data shouldn't be versioned)
+server/*.jar
+server/eula.txt
+server/logs/
+server/world/
+server/world_nether/
+server/world_the_end/
+server/plugins/
+server/cache/
+server/*.yml
+!server/.gitkeep

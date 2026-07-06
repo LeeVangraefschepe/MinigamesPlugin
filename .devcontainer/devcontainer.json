@@ -1,0 +1,39 @@
+{
+  "name": "Spigot Plugin Dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-maven",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic"
+      }
+    }
+  },
+  "forwardPorts": [25565, 5005],
+  "portsAttributes": {
+    "25565": {
+      "label": "Spigot Test Server",
+      "onAutoForward": "notify"
+    },
+    "5005": {
+      "label": "Java Debug (JDWP)",
+      "onAutoForward": "silent"
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-m2-cache,target=/home/vscode/.m2,type=volume",
+    "source=${localWorkspaceFolderBasename}-buildtools-cache,target=/home/vscode/.cache/spigot-buildtools,type=volume"
+  ],
+  // Builds Spigot for whatever version is in minecraft-version.env and installs
+  // it into the local Maven repo, so the plugin can compile right after the
+  // container starts. Re-run scripts/switch-version.sh to change versions later.
+  "postCreateCommand": "bash .devcontainer/scripts/build-spigot.sh",
+  "remoteUser": "vscode"
+}
